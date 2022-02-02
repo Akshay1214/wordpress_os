@@ -1,0 +1,78 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+      template.openshift.io/expose-uri: mysql://{.spec.clusterIP}:{.spec.ports[?(.name=="mariadb")].port}
+    creationTimestamp: "2022-01-31T18:39:27Z"
+    labels:
+      app: mariadb-ephemeral
+      app.kubernetes.io/component: mariadb-ephemeral
+      app.kubernetes.io/instance: mariadb-ephemeral
+      template: mariadb-ephemeral-template
+    name: mariadb
+    namespace: wordpress
+    resourceVersion: "11057859"
+    uid: f3927d3c-c569-40c8-8606-fa61a9c24df3
+  spec:
+    clusterIP: 172.30.163.198
+    clusterIPs:
+    - 172.30.163.198
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: mariadb
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
+    selector:
+      name: mariadb
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: "2022-01-31T18:42:02Z"
+    labels:
+      app: wordpress
+      app.kubernetes.io/component: wordpress
+      app.kubernetes.io/instance: wordpress
+    name: wordpress
+    namespace: wordpress
+    resourceVersion: "11058659"
+    uid: 9e8768a0-ff0c-485c-8f93-fdcaba52f7c2
+  spec:
+    clusterIP: 172.30.100.73
+    clusterIPs:
+    - 172.30.100.73
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: 8080-tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: 8443-tcp
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    selector:
+      deployment: wordpress
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

@@ -1,0 +1,4 @@
+user: userCJX
+password: etuxwUwucFhNW3KN
+database-name: sampledb
+host: mariadb
